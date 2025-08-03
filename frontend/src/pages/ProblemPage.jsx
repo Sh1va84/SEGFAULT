@@ -38,9 +38,9 @@ const ProblemPage = () => {
         const response = await axiosClient.get(`/problem/problemById/${problemId}`);
        
         
-        const initialCode = response.data.startCode.find(sc => sc.language === langMap[selectedLanguage]).initialCode;
+        const initialCode = response?.data.startCode.find(sc => sc.language === langMap[selectedLanguage]).initialCode;
 
-        setProblem(response.data);
+        setProblem(response?.data);
         
         setCode(initialCode);
         setLoading(false);
@@ -83,8 +83,8 @@ const ProblemPage = () => {
         code,
         language: selectedLanguage
       });
-
-      setRunResult(response.data);
+console.log(response);  
+      setRunResult(response?.data);
       setLoading(false);
       setActiveRightTab('testcase');
       
