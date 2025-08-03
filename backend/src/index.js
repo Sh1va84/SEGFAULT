@@ -12,18 +12,12 @@ const videoRouter = require("./routes/videoCreator");
 const cors = require('cors')
 
 // console.log("Hello")
-
-
 app.use(cors({
-  origin: [
-    'https://segfault-frontend-1.netlify.app', // Replace with actual Netlify URL
-    // Keep for local development
-  ],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-}));
+    origin: 'http:segfault-frontend-1.netlify.app',
+    credentials: true 
+}))
+
+
 // ...the rest of your app.use() routes
 
 app.use(express.json());
