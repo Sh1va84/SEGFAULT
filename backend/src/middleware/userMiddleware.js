@@ -6,7 +6,7 @@ const userMiddleware = async (req,res,next)=>{
 
     try{
         
-        const {token} = req.cookies;
+        const {token} = req.cookies.token;
         if(!token)
             throw new Error("Token is not persent");
 
@@ -36,7 +36,7 @@ const userMiddleware = async (req,res,next)=>{
 
         next();
     }
-    catch(err){
+    catch(err){  console.log("heremee");
         res.status(401).send("Error: "+ err.message)
     }
 
