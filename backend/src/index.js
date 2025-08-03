@@ -13,10 +13,18 @@ const cors = require('cors')
 
 // console.log("Hello")
 
+
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true 
-}))
+  origin: [
+    'https://segfault-frontend-1.netlify.app', // Replace with actual Netlify URL
+    'http://localhost:3000' // Keep for local development
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+// ...the rest of your app.use() routes
 
 app.use(express.json());
 app.use(cookieParser());
