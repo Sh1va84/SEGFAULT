@@ -13,7 +13,11 @@ const cors = require('cors')
 
 // console.log("Hello")
 app.use(cors({
-    origin: 'https:segfault-frontend-1.netlify.app',
+    origin: [
+        'https://segfault-frontend-1.netlify.app',
+        'http://localhost:3000',  // for local development
+        'http://localhost:5173'   // if using Vite
+    ],
     credentials: true 
 }))
 
