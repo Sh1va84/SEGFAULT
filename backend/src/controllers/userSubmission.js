@@ -9,9 +9,9 @@ const submitCode = async (req,res)=>{
     try{
       
        const userId = req.result._id;
-      //  const problemId = req.params.id;
+       const problemId = req.params.id;
 
-      const { problemId, code, language } = req.body;
+       let {code,language} = req.body;
 
       if(!userId||!code||!problemId||!language)
         return res.status(400).send("Some field missing");

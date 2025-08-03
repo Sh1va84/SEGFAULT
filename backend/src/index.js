@@ -17,7 +17,7 @@ const cors = require('cors')
 app.use(cors({
   origin: [
     'https://segfault-frontend-1.netlify.app', // Replace with actual Netlify URL
-    'http://localhost:3000' // Keep for local development
+    // Keep for local development
   ],
   credentials: true,
   optionsSuccessStatus: 200,
