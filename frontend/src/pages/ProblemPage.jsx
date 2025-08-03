@@ -29,7 +29,24 @@ const ProblemPage = () => {
   
 
   const { handleSubmit } = useForm();
+const fetchProblem = async () => {
+      setLoading(true);
+      try {
+        
+        const response = await axiosClient.get(`/problem/problemById/${problemId}`);
+       
+        
+        const initialCode = response.data.startCode.find(sc => sc.language === langMap[selectedLanguage]).initialCode;
 
+        setProblem(response.data);
+        
+        setCode(initialCode);
+        setLoading(false);
+        
+      } catch (error) {
+        console.error('Error fetching problem:', error);
+        setLoading(false);
+      }
  useEffect(() => {
     const fetchProblem = async () => {
       setLoading(true);

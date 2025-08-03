@@ -4,7 +4,7 @@ const submitRouter = express.Router();
 const userMiddleware = require("../middleware/userMiddleware");
 const {submitCode,runCode} = require("../controllers/userSubmission");
 
-submitRouter.post("/submit/:id", userMiddleware, submitCode);
-submitRouter.post("/run/:id",userMiddleware,runCode);
+submitRouter.post("/submit", userMiddleware, submitCode);
+submitRouter.post("/runcode",userMiddleware,runCode);
 
 module.exports = submitRouter;
