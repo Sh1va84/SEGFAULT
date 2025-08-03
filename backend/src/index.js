@@ -13,7 +13,7 @@ const cors = require('cors')
 
 // console.log("Hello")
 app.use(cors({
-    origin: 'http:segfault-frontend-1.netlify.app',
+    origin: 'https:segfault-frontend-1.netlify.app',
     credentials: true 
 }))
 
