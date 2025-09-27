@@ -1,65 +1,391 @@
-# 🔥 SEGFAULT: The Code Whisperer Engine 🔥
+SEGFAULT - The Ultimate Coding Practice Platform
+SEGFAULT is a full-stack, feature-rich web application designed to be the ultimate platform for developers to practice and hone their coding skills. It provides a seamless experience for solving Data Structures and Algorithms (DSA) problems, complete with an online code editor, instant feedback through test case evaluation, and AI-powered assistance. Administrators have a dedicated panel to manage problems and educational content, making it a comprehensive solution for both learners and educators.
 
-**A full-stack, AI-powered competitive programming platform designed for mastery, efficiency, and real-time grading.**
+✨ Key Features
+For Users 🧑‍💻
+Problem Solving: Browse a list of coding problems, filterable by difficulty, tags, and solved status.
 
-This project delivers an enterprise-grade experience for Data Structures and Algorithms (DSA) practice, featuring a **secure Express.js backend** with integrated code execution and a **dynamic React/Redux frontend** with a personalized **Gemini AI Tutor**.
+Integrated Code Editor: A powerful in-browser editor (powered by Monaco) with syntax highlighting for C++, Java, and JavaScript.
 
-## 🌟 Key Features
+Online Code Execution: Run your code against visible test cases for quick debugging and validation.
 
-| Feature | Description | Stack Components |
-| :--- | :--- | :--- |
-| **Real-Time Code Grading** | Instant submission grading against **hidden test cases** using an integrated Judge0-like API utility. Provides precise runtime and memory metrics. | Backend: `userSubmission.js`, `problemUtility.js` |
-| **Gemini AI Tutor** | A dedicated, context-aware AI chat (powered by **Gemini 1.5 Flash**) integrated into the IDE. It acts strictly as a DSA expert, offering hints, code review, and complexity analysis. | Frontend: `ChatAi.jsx` <br/> Backend: `solveDoubt.js` |
-| **Secure Authentication** | Robust security featuring **JWT-based sessions**, password hashing via bcrypt, and **Redis blacklisting** for instant token invalidation upon logout. | Backend: `userAuthent.js`, `redis.js`, `userMiddleware.js` |
-| **Admin Content Management** | Admin-gated modules for full CRUD operations on problems, including pre-deployment **reference solution validation** and dedicated video solution management. | Frontend: `AdminPanel.jsx`, `AdminVideo.jsx` <br/> Backend: `userProblem.js` |
-| **Integrated IDE & UI** | A sleek, responsive user interface (built with DaisyUI/Tailwind) featuring the **Monaco Editor**, a customizable layout, and an integrated submission history viewer. | Frontend: `ProblemPage.jsx` |
-| **Video Editorial Solutions** | Secure video solution streaming via Cloudinary, managed end-to-end through the Admin panel. | Backend: `videoSection.js` <br/> Frontend: `Editorial.jsx` |
+Secure Submission System: Submit your final solution to be judged against a comprehensive set of hidden test cases.
 
-## ⚙️ Full-Stack Architecture
+Detailed Submission History: Review all your past submissions for a specific problem, including your code, status, runtime, and memory usage.
 
-### 1. ⚛️ Frontend (`/frontend/src`)
+AI-Powered Tutor: Stuck on a problem? Get hints, explanations, and code reviews from an integrated AI Chatbot powered by Google Gemini.
 
-The application layer built on modern standards for performance and user experience.
+Video Editorials: Watch detailed video explanations for problems, uploaded by administrators.
 
-| Component | Technology | Role & State Management |
-| :--- | :--- | :--- |
-| **Framework** | **React** (Vite) | Main application rendering and routing (`App.jsx`, `main.jsx`). |
-| **Styling** | **Tailwind CSS + DaisyUI** | Highly responsive, component-based styling (`index.css`). |
-| **State Mgmt.** | **Redux Toolkit** | Centralized, secure state management for authentication (`authSlice.js`). |
-| **Form Handling** | **React Hook Form + Zod** | Validation and handling for all forms (Login, Signup, Admin Panel). |
-| **IDE** | **Monaco Editor** | The in-browser code editor used in `ProblemPage.jsx`. |
+Secure Authentication: Robust user registration and login system using JWT and cookies.
 
-### 2. 🟢 Backend (`/backend/src`)
+For Admins 👨‍💼
+Comprehensive Admin Panel: A dedicated dashboard for managing the platform's content.
 
-The core engine responsible for data, security, and external API communication.
+Full CRUD for Problems: Admins can create, read, update, and delete coding problems with detailed descriptions, test cases, and starter code.
 
-| Component | Technology | Role |
-| :--- | :--- | :--- |
-| **API** | **Express.js (Node.js)** | Routing, Middleware, and CORS management (`index.js`). |
-| **Database** | **MongoDB (Mongoose)** | Data modeling for Users, Problems, Submissions, and Videos. |
-| **Caching/Security** | **Redis Client** | Caching for token blacklisting (logout security). |
-| **Code Execution** | **Judge0 API Utility** | Handles batch submission and result fetching (`problemUtility.js`). |
-| **AI** | **Google GenAI SDK** | Powers the DSA tutor (`solveDoubt.js`). |
-| **Cloud** | **Cloudinary v2** | Manages video uploads, signatures, and hosting (`videoSection.js`). |
+Video Content Management: Easily upload new video editorials for problems and delete existing ones. Cloudinary integration ensures efficient video storage and delivery.
 
-## 🔑 Security & Authorization Flow
+Role-Based Access Control: Secure routes and functionalities exclusive to admin users.
 
-1. **Authentication:** User signs up (`Signup.jsx`), passing data to `POST /user/register`. Data is validated (Zod/Mongoose), password is **bcrypt hashed**, and a **JWT** is issued as an `HttpOnly` cookie.
-2. **Authorization:** All protected routes use `userMiddleware.js` or `adminMiddleware.js`.
-   * The middleware verifies the JWT signature and checks the user's role.
-   * It checks the Redis client to ensure the token has **NOT been blacklisted** (preventing logged-out access).
-3. **Logout:** Hitting `POST /user/logout` sends the current JWT to Redis, blacklisting it based on its expiry time, and clears the cookie—guaranteeing immediate session termination.
+🛠️ Tech Stack
+This project is a full MERN-stack application with several powerful third-party services.
 
-## 🚀 Quick Start (Configuration)
+Category
 
-Before running the backend, ensure your `.env` file contains the necessary secrets:
+Technology / Service
+
+Frontend
+
+React.js, Redux Toolkit, React Router, Vite, Tailwind CSS, DaisyUI, Monaco Editor, Axios
+
+Backend
+
+Node.js, Express.js, MongoDB
+
+Database
+
+Mongoose (ODM)
+
+Caching
+
+Redis (For session/token blocklisting)
+
+Auth
+
+JSON Web Tokens (JWT), bcrypt
+
+Services
+
+Judge0 (Online Code Execution), Google Gemini (AI Chat), Cloudinary (Video Upload & Storage)
+
+📂 Project Structure
+The project is organized into two main directories: frontend and backend.
+
+<details>
+<summary><b>Frontend Structure (/frontend/src)</b></summary>
+
+/frontend/src
+├── assets/
+├── components/
+│   ├── AdminDelete.jsx
+│   ├── AdminPanel.jsx
+│   ├── AdminUpload.jsx
+│   ├── AdminVideo.jsx
+│   ├── ChatAi.jsx
+│   ├── Editorial.jsx
+│   └── SubmissionHistory.jsx
+├── pages/
+│   ├── Admin.jsx
+│   ├── Homepage.jsx
+│   ├── Login.jsx
+│   ├── ProblemPage.jsx
+│   └── Signup.jsx
+├── store/
+│   └── store.js
+├── utils/
+│   └── axiosClient.js
+├── App.jsx
+├── authSlice.js
+└── main.jsx
+
+</details>
+
+<details>
+<summary><b>Backend Structure (/backend/src)</b></summary>
+
+/backend/src
+├── config/
+│   ├── db.js
+│   └── redis.js
+├── controllers/
+│   ├── solveDoubt.js
+│   ├── userAuthent.js
+│   ├── userProblem.js
+│   ├── userSubmission.js
+│   └── videoSection.js
+├── middleware/
+│   ├── adminMiddleware.js
+│   └── userMiddleware.js
+├── models/
+│   ├── problem.js
+│   ├── solutionVideo.js
+│   ├── submission.js
+│   └── user.js
+├── routes/
+│   ├── aiChatting.js
+│   ├── problemCreator.js
+│   ├── submit.js
+│   ├── userAuth.js
+│   └── videoCreator.js
+└── utils/
+    ├── problemUtility.js
+    └── validator.js
+
+</details>
+
+🚀 Getting Started
+Follow these instructions to get a local copy of the project up and running.
+
+Prerequisites
+Node.js (v18.x or higher)
+
+npm or yarn
+
+A running MongoDB instance (local or cloud-based like MongoDB Atlas)
+
+A running Redis instance (local or cloud-based like Redis Cloud)
+
+Backend Setup
+Clone the repository:
+
+git clone [https://github.com/your-username/segfault-repo.git](https://github.com/your-username/segfault-repo.git)
+cd segfault-repo/backend
+
+Install dependencies:
+
+npm install
+
+Create a .env file in the backend directory and add the following environment variables. Replace the placeholder values with your actual credentials.
+
+# Server Configuration
 PORT=3000
-DB_CONNECT_STRING=mongodb+srv://<user>:<password>@cluster/
-JWT_KEY=<your_jwt_secret_key>
-REDIS_PASS=<your_redis_password>
-JUDGE0_KEY=<your_judge0_rapidapi_key>
-CLOUDINARY_CLOUD_NAME=<your_cloudinary_cloud_name>
-CLOUDINARY_API_KEY=<your_cloudinary_api_key>
-CLOUDINARY_API_SECRET=<your_cloudinary_api_secret>
-GEMINI_KEY=<your_google_gemini_api_key>
+
+# Database and Cache
+DB_CONNECT_STRING=<YOUR_MONGODB_CONNECTION_STRING>
+REDIS_PASS=<YOUR_REDIS_PASSWORD>
+# Note: Redis host and port are hardcoded in /src/config/redis.js. Update if necessary.
+
+# Authentication
+JWT_KEY=<YOUR_SUPER_SECRET_JWT_KEY> # A long, random string
+
+# Third-Party API Keys
+JUDGE0_KEY=<YOUR_RAPIDAPI_JUDGE0_KEY>
+GEMINI_KEY=<YOUR_GOOGLE_GEMINI_API_KEY>
+CLOUDINARY_CLOUD_NAME=<YOUR_CLOUDINARY_CLOUD_NAME>
+CLOUDINARY_API_KEY=<YOUR_CLOUDINARY_API_KEY>
+CLOUDINARY_API_SECRET=<YOUR_CLOUDINARY_API_SECRET>
+
+Start the backend server:
+
+npm start
+
+The server should now be running on http://localhost:3000.
+
+Frontend Setup
+Navigate to the frontend directory:
+
+cd ../frontend
+
+Install dependencies:
+
+npm install
+
+Start the frontend development server:
+
+npm run dev
+
+The React application should now be running on http://localhost:5173 (or another port if 5173 is busy).
+
+⚡ API Endpoints
+Here is a summary of the available API routes. All routes are prefixed with their respective router prefix (e.g., /user, /problem).
+
+Method
+
+Endpoint
+
+Description
+
+Protected
+
+Role
+
+POST
+
+/user/register
+
+Register a new user.
+
+No
+
+-
+
+POST
+
+/user/login
+
+Log in a user.
+
+No
+
+-
+
+POST
+
+/user/logout
+
+Log out the current user.
+
+Yes
+
+User
+
+GET
+
+/user/check
+
+Check authentication status.
+
+Yes
+
+User
+
+POST
+
+/problem/create
+
+Create a new coding problem.
+
+Yes
+
+Admin
+
+PUT
+
+/problem/update/:id
+
+Update an existing problem.
+
+Yes
+
+Admin
+
+DELETE
+
+/problem/delete/:id
+
+Delete a problem.
+
+Yes
+
+Admin
+
+GET
+
+/problem/problemById/:id
+
+Get a single problem by its ID.
+
+Yes
+
+User
+
+GET
+
+/problem/getAllProblem
+
+Get a list of all problems.
+
+Yes
+
+User
+
+GET
+
+/problem/problemSolvedByUser
+
+Get problems solved by the current user.
+
+Yes
+
+User
+
+GET
+
+/problem/submittedProblem/:pid
+
+Get submission history for a problem.
+
+Yes
+
+User
+
+POST
+
+/submission/submit/:id
+
+Submit a code solution for judging.
+
+Yes
+
+User
+
+POST
+
+/submission/run/:id
+
+Run code against visible test cases.
+
+Yes
+
+User
+
+POST
+
+/ai/chat
+
+Interact with the AI tutor.
+
+Yes
+
+User
+
+GET
+
+/video/create/:problemId
+
+Get a signature to upload a video.
+
+Yes
+
+Admin
+
+POST
+
+/video/save
+
+Save uploaded video metadata.
+
+Yes
+
+Admin
+
+DELETE
+
+/video/delete/:problemId
+
+Delete a problem's video solution.
+
+Yes
+
+Admin
+
+🖼️ Screenshots
+A glimpse of the clean and intuitive user interface of the SEGFAULT platform.
+
+🤝 Contributing
+Contributions are welcome! If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+
+Fork the repository.
+
+Create your feature branch (git checkout -b feature/new-amazing-feature).
+
+Commit your changes (git commit -m 'Add some amazing feature').
+
+Push to the branch (git push origin feature/new-amazing-feature).
+
+Open a Pull Request.
+
+📄 License
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
