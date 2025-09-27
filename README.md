@@ -53,4 +53,13 @@ The core engine responsible for data, security, and external API communication.
 ## 🚀 Quick Start (Configuration)
 
 Before running the backend, ensure your `.env` file contains the necessary secrets:
+PORT=3000
+DB_CONNECT_STRING=mongodb+srv://<user>:<password>@cluster/
+JWT_KEY=<your_jwt_secret_key>
+REDIS_PASS=<your_redis_password>
+JUDGE0_KEY=<your_judge0_rapidapi_key>
+CLOUDINARY_CLOUD_NAME=<your_cloudinary_cloud_name>
+CLOUDINARY_API_KEY=<your_cloudinary_api_key>
+CLOUDINARY_API_SECRET=<your_cloudinary_api_secret>
+GEMINI_KEY=<your_google_gemini_api_key>
 
